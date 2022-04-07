@@ -1,7 +1,11 @@
 from lab import models
 from lab import generators
 
+size = 10
+space = models.Space(size, generators.barabasi_albert(size))
+dice_1 = models.Dice()
+dice_2 = models.Dice()
 
-space = models.Space(10, generators.barabasi_albert(10))
+# do smth
 
-# do smth with space
+print(dice_1.roll(), dice_2.roll())
