@@ -3,8 +3,8 @@ import random
 
 class Route:
     def __init__(self, length: int,
-                 _pool: tuple[int, ...] = None,
-                 _weights: tuple[int, ...] = None):
+                 _pool: tuple = None,
+                 _weights: tuple = None):
         if _pool is None:
             _pool = (0, 1, 2, 3, 4)
             _weights = (4, 1, 1, 1, 1)
@@ -34,7 +34,7 @@ class Route:
     def __len__(self):
         return self.__length
 
-    def __getitem__(self, item: tuple[int, int]):
+    def __getitem__(self, item: tuple):
         if isinstance(item, int):
             return self.__route[item]
 
@@ -53,7 +53,7 @@ Route.none = Route(0)
 
 
 class Space:
-    def __init__(self, size: int, routes: tuple[tuple[int, int, Route], ...]):
+    def __init__(self, size: int, routes: tuple):
         self.__size = size
         self.__space = [[Route.none for _ in range(size)] for _ in range(size)]
         self.__routes = routes
@@ -81,7 +81,7 @@ class Space:
     def __len__(self):
         return self.__size
 
-    def __getitem__(self, item: tuple[int, int]):
+    def __getitem__(self, item: tuple):
         return self.__space[item[0]][item[1]]
 
     def __repr__(self):
@@ -90,8 +90,8 @@ class Space:
 
 class Dice:
     def __init__(self, change_prob: float = 0.3,
-                 _pool: tuple[int, ...] = None,
-                 _weights: tuple[int, ...] = None):
+                 _pool: tuple = None,
+                 _weights: tuple = None):
 
         if _pool is None:
             _pool = (0, 1, 2, 3, 4)

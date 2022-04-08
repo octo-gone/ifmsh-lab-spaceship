@@ -3,7 +3,7 @@ import random
 
 
 def barabasi_albert(size: int, k: int = 2,
-                    _route_length: tuple = tuple(range(4, 12))) -> tuple[tuple[int, int, models.Route], ...]:
+                    _route_length: tuple = tuple(range(4, 12))):
     result = []
     for i in range(size):
         pool = list(set(range(i)) - {i})
@@ -15,7 +15,7 @@ def barabasi_albert(size: int, k: int = 2,
     return tuple(result)
 
 
-def halo(size: int, _route_length: tuple = (12,)) -> tuple[tuple[int, int, models.Route], ...]:
+def halo(size: int, _route_length: tuple = (12,)):
     result = []
     for i in range(size):
         j = i + 1

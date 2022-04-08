@@ -19,7 +19,7 @@ def generate_positions(space: models.Space):
 colors = ["white", "red", "yellow", "green", "blue"]
 
 
-def draw_space(space: models.Space, nodes_positions: dict, dices: tuple[models.Dice, ...] = None):
+def draw_space(space: models.Space, nodes_positions: dict, dices: tuple = None):
     size = (1200, 1200)
     half_size = (size[0] // 2, size[1] // 2)
     draw_size = (1000, 1000)
