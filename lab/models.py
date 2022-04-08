@@ -45,7 +45,7 @@ class Route:
 
     def reverse(self):
         copied = Route(length=self.__length)
-        copied.__route = reversed(self.__route.copy())
+        copied.__route = tuple(reversed(self.__route.copy()))
         return copied
 
 
