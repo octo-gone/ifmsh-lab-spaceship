@@ -56,6 +56,7 @@ class Space:
     def __init__(self, size: int, routes: tuple[tuple[int, int, Route], ...]):
         self.__size = size
         self.__space = [[Route.none for _ in range(size)] for _ in range(size)]
+        self.__routes = routes
 
         for i, j, value in routes:
             self.__space[i][j] = value
@@ -67,6 +68,14 @@ class Space:
 
     @size.setter
     def size(self, value):
+        pass
+
+    @property
+    def routes(self):
+        return self.__routes
+
+    @routes.setter
+    def routes(self, value):
         pass
 
     def __len__(self):
@@ -91,23 +100,23 @@ class Dice:
         if _weights is None:
             _weights = tuple([1 for _ in range(len(_pool))])
 
-        values = [random.randint(1, 6) if random.random() < change_prob else i for i in range(1, 7)]
-        self.__values = []
-        for i, value in enumerate(values):
-            self.__values.append(tuple(random.choices(_pool, weights=_weights, k=value)))
-        self.__values.sort(key=len)
-        self.__values = tuple(self.__values)
+        sides = [random.randint(1, 6) if random.random() < change_prob else i for i in range(1, 7)]
+        self.__sides = []
+        for i, side in enumerate(sides):
+            self.__sides.append(tuple(random.choices(_pool, weights=_weights, k=side)))
+        self.__sides.sort(key=len)
+        self.__sides = tuple(self.__sides)
 
     @property
-    def values(self):
-        return self.__values
+    def sides(self):
+        return self.__sides
 
-    @values.setter
-    def values(self, value):
+    @sides.setter
+    def sides(self, value):
         pass
 
     def roll(self):
-        return random.choice(self.__values)
+        return random.choice(self.__sides)
 
     def __repr__(self):
-        return f"<Dice {self.__values}>"
+        return f"<Dice {self.__sides}>"
