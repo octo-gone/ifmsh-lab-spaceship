@@ -84,9 +84,9 @@ def draw_space(space: models.Space, nodes_positions: dict, dices: tuple = None):
                                       side_center[0] + point_size, side_center[1] + point_size),
                                      fill=colors[side[j]], outline="black", width=3)
 
-        img.save("space.png")
-        del img_draw
-        del img
+    img.save("space.png")
+    del img_draw
+    del img
 
 
 def get_regular_polygon_points(count, rotation, position, radius):
