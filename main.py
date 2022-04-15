@@ -1,12 +1,21 @@
 from lab import models
 from lab import generators
+import solution
+import random
 
-size = 10
-space = models.Space(size, generators.halo(size))
+random.seed(1)
+
+size = random.randint(5, 12)
+space = models.Space(size, generators.barabasi_albert)
 
 dice_1 = models.Dice()
 dice_2 = models.Dice()
 
-print(dice_1.roll(), dice_2.roll())
+points_pool = list(range(size))
+random.shuffle(points_pool)
+start = points_pool.pop()
+end = points_pool.pop()
 
-# do smth
+result = solution.main(space, start, end, dice_1, dice_2)
+
+print(result)

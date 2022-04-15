@@ -53,8 +53,11 @@ Route.none = Route(0)
 
 
 class Space:
-    def __init__(self, size: int, routes: tuple):
+    def __init__(self, size: int, generating_algorithm, *alg_args, **alg_kwargs):
         self.__size = size
+
+        routes = generating_algorithm(size, *alg_args, **alg_kwargs)
+
         self.__space = [[Route.none for _ in range(size)] for _ in range(size)]
         self.__routes = routes
 
