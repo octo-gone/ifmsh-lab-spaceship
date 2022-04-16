@@ -2,9 +2,22 @@ import random
 
 
 class Route:
+    none = None
+
     def __init__(self, length: int,
                  _pool: tuple = None,
                  _weights: tuple = None):
+        """
+        Маршрут между точками, состоит из ячеек со значениями
+
+        :param length: длина маршрута
+        :param _pool: варианты ячеек
+        :param _weights: веса вариантов для генерации
+        """
+
+        if Route.none is None:
+            Route.none = Route(0)
+
         if _pool is None:
             _pool = (0, 1, 2, 3, 4)
             _weights = (4, 1, 1, 1, 1)
@@ -17,6 +30,7 @@ class Route:
 
     @property
     def length(self):
+        """Длина пути данного маршрута"""
         return self.__length
 
     @length.setter
@@ -25,6 +39,7 @@ class Route:
 
     @property
     def route(self):
+        """Маршрут в формате кортежа (массива)"""
         return self.__route
 
     @route.setter
@@ -44,6 +59,7 @@ class Route:
         return f"<Route {'-'.join(map(str, self.__route))}>"
 
     def reverse(self):
+        """Функция инвертирования маршрута"""
         copied = Route(length=self.__length)
         copied.__route = tuple(reversed(self.__route.copy()))
         return copied
@@ -54,6 +70,14 @@ Route.none = Route(0)
 
 class Space:
     def __init__(self, size: int, generating_algorithm, *alg_args, **alg_kwargs):
+        """
+        Космос в виде графа
+
+        :param size: количество вершин
+        :param generating_algorithm: алгоритм генерации
+        :param alg_args: позиционные аргументы алгоритма генерации
+        :param alg_kwargs: ключи-аргументы алгоритма генерации
+        """
         self.__size = size
 
         routes = generating_algorithm(size, *alg_args, **alg_kwargs)
@@ -67,6 +91,7 @@ class Space:
 
     @property
     def size(self):
+        """Количество вершин"""
         return self.__size
 
     @size.setter
@@ -75,6 +100,7 @@ class Space:
 
     @property
     def routes(self):
+        """Все маршрута (без инверсий)"""
         return self.__routes
 
     @routes.setter
@@ -84,7 +110,9 @@ class Space:
     def __len__(self):
         return self.__size
 
-    def __getitem__(self, item: tuple):
+    def __getitem__(self, item):
+        if isinstance(item, int):
+            return self.__space[item]
         return self.__space[item[0]][item[1]]
 
     def __repr__(self):
@@ -95,6 +123,13 @@ class Dice:
     def __init__(self, change_prob: float = 0.3,
                  _pool: tuple = None,
                  _weights: tuple = None):
+        """
+        Кубик
+
+        :param change_prob: вероятность изменения стороны
+        :param _pool: возможные цвета точек
+        :param _weights: веса возможных цветов точек
+        """
 
         if _pool is None:
             _pool = (0, 1, 2, 3, 4)
@@ -112,6 +147,7 @@ class Dice:
 
     @property
     def sides(self):
+        """Все стороны"""
         return self.__sides
 
     @sides.setter
@@ -119,6 +155,7 @@ class Dice:
         pass
 
     def roll(self):
+        """Бросить кубик"""
         return random.choice(self.__sides)
 
     def __repr__(self):
