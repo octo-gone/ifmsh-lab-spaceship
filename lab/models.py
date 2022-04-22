@@ -15,9 +15,6 @@ class Route:
         :param _weights: веса вариантов для генерации
         """
 
-        if Route.none is None:
-            Route.none = Route(0)
-
         if _pool is None:
             _pool = (0, 1, 2, 3, 4)
             _weights = (4, 1, 1, 1, 1)
